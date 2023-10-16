@@ -36,6 +36,7 @@
 #include "cutils.h"
 #include "softfp.h"
 #include "mpdecimal.h"
+#include "monolithic_examples.h"
 
 typedef enum {
     /* low level operations */
@@ -2004,7 +2005,11 @@ void help(void)
     exit(1);
 }
 
-int main(int argc, char **argv)
+#if defined (BUILD_MONOLITHIC)
+#define main			libbf_test_main
+#endif
+
+int main(int argc, const char **argv)
 {
     int seed, duration_ms, c;
     limb_t prec;

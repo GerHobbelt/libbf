@@ -29,6 +29,7 @@
 #include <plf_nanotimer_c_api.h>
 
 #include "libbf.h"
+#include "monolithic_examples.h"
 
 #define CHUD_A 13591409
 #define CHUD_B 545140134
@@ -176,7 +177,11 @@ static void pi_chud(bf_t *Q, int64_t prec)
     bf_delete(&G);
 }
 
-int main(int argc, char **argv)
+#if defined (BUILD_MONOLITHIC)
+#define main			libbf_tinypi_main
+#endif
+
+int main(int argc, const char **argv)
 {
     int64_t n_digits, prec, n_bits, ti_tot;
     bf_t PI;
