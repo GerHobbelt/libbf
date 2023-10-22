@@ -29,6 +29,21 @@
 #include <math.h>
 #include <getopt.h>
 #include <plf_nanotimer_c_api.h>
+
+#if defined(_MSC_VER)
+
+#if defined (BUILD_MONOLITHIC)
+#define main			libbf_test_main
+#endif
+
+int main(int argc, const char **argv)
+{
+	fprintf(stderr, "BFTest expects GnuMP et al, which we do not support when using the MSVC compiler.\n");
+	return 1;
+}
+
+#else
+
 #include <gmp.h>
 #include <mpfr.h>
 
@@ -2097,3 +2112,5 @@ int main(int argc, const char **argv)
     }
     return 0;
 }
+
+#endif // defined(_MSC_VER)
