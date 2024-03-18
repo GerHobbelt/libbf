@@ -169,10 +169,8 @@ int dbuf_put(DynBuf *s, const uint8_t *data, size_t len)
         if (dbuf_realloc(s, s->size + len))
             return -1;
     }
-    if (len > 0) {
-        memcpy(s->buf + s->size, data, len);
-        s->size += len;
-    }
+    memcpy_no_ub(s->buf + s->size, data, len);
+    s->size += len;
     return 0;
 }
 
